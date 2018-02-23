@@ -27,13 +27,13 @@ public int rob(TreeNode root) {
     
     return Math.max(val + root.val, rob(root.left) + rob(root.right));
 }
-However the solution runs very slowly (1186 ms) and barely got accepted (the time complexity turns out to be exponential, see my comments below).
+/*However the solution runs very slowly (1186 ms) and barely got accepted (the time complexity turns out to be exponential, see my comments below).
 
 Step II – Think one step further
 
 In step I, we only considered the aspect of “optimal substructure”, but think little about the possibilities of overlapping of the subproblems. For example, to obtain rob(root), we need rob(root.left), rob(root.right), rob(root.left.left), rob(root.left.right), rob(root.right.left), rob(root.right.right); but to get rob(root.left), we also need rob(root.left.left), rob(root.left.right), similarly for rob(root.right). The naive solution above computed these subproblems repeatedly, which resulted in bad time performance. Now if you recall the two conditions for dynamic programming: “optimal substructure” + “overlapping of subproblems”, we actually have a DP problem. A naive way to implement DP here is to use a hash map to record the results for visited subtrees.
 
-And here is the improved solution:
+And here is the improved solution:*/
 
 public int rob(TreeNode root) {
     return robSub(root, new HashMap<>());
@@ -58,7 +58,7 @@ private int robSub(TreeNode root, Map<TreeNode, Integer> map) {
     
     return val;
 }
-The runtime is sharply reduced to 9 ms, at the expense of O(n) space cost (n is the total number of nodes; stack cost for recursion is not counted).
+/*The runtime is sharply reduced to 9 ms, at the expense of O(n) space cost (n is the total number of nodes; stack cost for recursion is not counted).
 
 Step III – Think one step back
 
@@ -71,7 +71,7 @@ If we were able to maintain the information about the two scenarios for each tre
 Let’s relate rob(root) to rob(root.left) and rob(root.right)..., etc. For the 1st element of rob(root), we only need to sum up the larger elements of rob(root.left) and rob(root.right), respectively, since root is not robbed and we are free to rob its left and right subtrees. For the 2nd element of rob(root), however, we only need to add up the 1st elements of rob(root.left) and rob(root.right), respectively, plus the value robbed from root itself, since in this case it’s guaranteed that we cannot rob the nodes of root.left and root.right.
 
 As you can see, by keeping track of the information of both scenarios, we decoupled the subproblems and the solution essentially boiled down to a greedy one. Here is the program:
-
+*/
 public int rob(TreeNode root) {
     int[] res = robSub(root);
     return Math.max(res[0], res[1]);
