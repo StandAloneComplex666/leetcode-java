@@ -1,10 +1,4 @@
-
-Created at: a day ago
-
-amby_leet_code
-amby_leet_code
- 0
-We first put all the iterators in queue. After that, we exhaust the first iterator and remove it from the queue & so forth.
+//version 1:
 
 public class Vector2D implements Iterator<Integer> {
 
@@ -33,3 +27,42 @@ public class Vector2D implements Iterator<Integer> {
         return !queue.isEmpty();
     }
 }
+
+//version 2:
+public class Vector2D implements Iterator<Integer> {
+    
+    private int indexElement;
+    private int indexList;
+    private List<List<Integer>> list;
+    
+    public Vector2D(List<List<Integer>> vec2d) {
+        list = vec2d;
+        indexElement = 0;
+        indexList = 0;
+    }
+
+    @Override
+    public Integer next() {
+        return list.get(indexList).get(indexElement++);
+    }
+
+    @Override
+    public boolean hasNext() {
+        while(indexList < list.size()){
+            if(indexElement < list.get(indexList).size()){
+                return true;
+            }
+            else{
+                indexList++;
+                indexElement = 0;
+            }
+        }
+        return false;
+    }
+}
+
+/**
+ * Your Vector2D object will be instantiated and called as such:
+ * Vector2D i = new Vector2D(vec2d);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
