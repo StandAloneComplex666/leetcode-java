@@ -37,3 +37,53 @@ class Solution {
         }
     }
 }
+
+// union find solution, much faster than the first dfs version:
+class Solution {
+    public int findCircleNum(int[][] M) {
+        UnionFind uf = new UnionFind(M.length);
+        for(int i = 0; i < M.length; ++i) {
+            for(int j = i + 1; j < M.length; ++j) {
+                if(M[i][j] == 1) {
+                    uf.union(i, j);
+                }
+            }
+        }
+        
+        return uf.count;
+    }
+    
+    class UnionFind {
+        int[] parent;
+        int count;
+        public UnionFind(int capacity) {
+            this.parent = new int[capacity];
+            for(int i = 0; i < capacity; ++i) {
+                parent[i] = i;
+            }
+            
+            this.count = capacity;
+        }
+        
+        public int find(int p) {
+            while(p != parent[p]) {
+                p = parent[p];
+            }
+            
+            return p;
+        }
+        
+        public void union(int p, int q) {
+            int pp  = find(p);
+            int pq = find(q);
+            if(pp != pq) {
+                int min = Math.min(pp, pq);
+                parent[p] = min;
+                parent[q] = min;
+                parent[pp] = min;
+                parent[pq] = min;
+                --count;
+            }
+        }
+    }
+}
