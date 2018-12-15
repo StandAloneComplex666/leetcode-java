@@ -87,3 +87,31 @@ class Solution {
         }
     }
 }
+
+// a faster one:
+class Solution {
+    public int findCircleNum(int[][] M) {
+        int[] connectedComponents =new int[M.length];
+        for( int i=0;i<connectedComponents.length;i++){
+          connectedComponents[i]=i;
+        }
+        int count=M.length;
+         for(int i=0;i< M.length;i++){
+            for(int j=0;j< M.length;j++){
+               if(i<j && M[i][j]==1){
+                   int ik=i;
+                   while(ik!=connectedComponents[ik]){
+                       ik=connectedComponents[ik];
+                   }
+                   int jk=j;
+                   while(jk!=connectedComponents[jk]){
+                       jk=connectedComponents[jk];
+                   }
+                   if(ik!=jk) count--;
+                   connectedComponents[jk]=ik;
+               }
+            }
+        }
+        return count<=0?1:count;
+    }
+}
