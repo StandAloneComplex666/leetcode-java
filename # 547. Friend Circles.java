@@ -30,6 +30,7 @@ class Solution {
         return circles; //Step 4
     }
     private void dfs(HashMap<Integer, List<Integer>> graph, int student, boolean[] visited){
+    private void dfs(HashMap<Integer, List<Ingeter>> graph, int student, boolean[] visited){
         if(visited[student]) return;
         visited[student] = true;
         for(int friend : graph.get(student)){
