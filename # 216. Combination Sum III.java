@@ -16,7 +16,7 @@ class Solution {
             if (target < numbers[i]) break;
             list.add(numbers[i]);
             helper(numbers, k, target - numbers[i], i+1, list, counter+1);
-            //here if I choose index + 1 instead of i + 1, I will get the answer of duplicate numbers like(1,3,3),(2,2,3)
+            
             list.remove(list.size() - 1);
         }
     }
