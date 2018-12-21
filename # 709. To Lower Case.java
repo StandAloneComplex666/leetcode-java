@@ -4,6 +4,5 @@ class Solution
    {
         String result = str.toLowerCase();
         return result; 
-				
-    }
+	}
 }
