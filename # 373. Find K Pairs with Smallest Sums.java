@@ -13,8 +13,7 @@ class Solution {
             }
         }
         while (pq.size() > 0)
-            result.add(0, pq.poll());
-        
+            result.add(0, pq.poll());        
         return result;
     }
 }
